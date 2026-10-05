@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOW TO USE </title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1c1e21;
+    --muted: #666d76;
+    --accent: #2a7de1;
+    --code-bg: #eef3fb;
+    --border: #e3e6ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171b;
+      --card: #1e2227;
+      --text: #e8eaed;
+      --muted: #9aa2ab;
+      --accent: #5aa2f5;
+      --code-bg: #26303d;
+      --border: #2d333b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px 48px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; font-size: .95rem; }
+  input[type=search] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+  .cmd {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .cmd-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  code {
+    background: var(--code-bg);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .95rem;
+    word-break: break-all;
+  }
+  button.copy {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: .8rem;
+    cursor: pointer;
+  }
+  button.copy:active { background: var(--code-bg); }
+  .desc { margin: 8px 0 0; color: var(--muted); font-size: .93rem; }
+  .empty { text-align: center; color: var(--muted); display: none; padding: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>HOW TO USE</h1>
+  <p class="sub">Bot control reference for the owner</p>
+  <div id="list">
+    <div class="cmd"><div class="cmd-head"><code>/message &lt;customer_telegram_id&gt; &lt;text&gt;</code><button class="copy" data-c="/message ">Copy</button></div><p class="desc">Send a message to a customer.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/send &lt;customer_telegram_id&gt;</code><button class="copy" data-c="/send ">Copy</button></div><p class="desc">Choose a customer, then upload a photo or document.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/upload</code><button class="copy" data-c="/upload">Copy</button></div><p class="desc">Submit a file for the owner to approve.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/pending</code><button class="copy" data-c="/pending">Copy</button></div><p class="desc">Review user file submissions.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/delete</code><button class="copy" data-c="/delete">Copy</button></div><p class="desc">Remove a file from the catalog.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/files</code><button class="copy" data-c="/files">Copy</button></div><p class="desc">List files customers can request.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/view</code><button class="copy" data-c="/view">Copy</button></div><p class="desc">Choose an HTML file to download.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/previewht</code><button class="copy" data-c="/previewht">Copy</button></div><p class="desc">Open HTML in a browser on the bot computer.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/viewht &lt;file_name&gt;</code><button class="copy" data-c="/viewht ">Copy</button></div><p class="desc">Get an HTML file to open in a browser.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/cancel</code><button class="copy" data-c="/cancel">Copy</button></div><p class="desc">Cancel the pending delivery.</p></div>
+    <div class="cmd"><div class="cmd-head"><code>/help</code><button class="copy" data-c="/help">Copy</button></div><p class="desc">Show this message.</p></div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('button.copy').forEach(b => {
+    b.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(b.dataset.c);
+        b.textContent = 'Copied';
+      } catch (e) {
+        b.textContent = 'Failed';
+      }
+      setTimeout(() => (b.textContent = 'Copy'), 1200);
+    });
+  });
+</script>
+</body>
+</html>
